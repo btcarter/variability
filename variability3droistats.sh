@@ -9,7 +9,7 @@
 ### set variables - these are the only things you'll have to change
 
 STUDY=/fslhome/ben88/compute/Reading
-WORK_DIR=$STUDY/Compute_data/Group_Analysis1/predictability1
+WORK_DIR=$STUDY/results/Group_Analysis2/predictability3
 SUBJ_DIR=$STUDY/Compute_data/SubjData
 
 
@@ -25,7 +25,7 @@ cd ${WORK_DIR}  # because who knows where you put this script
 touch ${STATS}.txt     # make this for later
 
 for i in $(ls $SUBJ_DIR); do
-    cd ${SUBJ_DIR}/${i}/afni_data/predictability1
+    cd ${SUBJ_DIR}/${i}/afni_data/predictability3
 
     stat=`3dROIstats -nzmean -nzminmax -nzsigma -mask ${MASK} '${SUBJ_DIR}/${i}/afni_data/predictability1/predictability_deconv_blur5_ANTS_resampled+tlrc[5]'`
 
