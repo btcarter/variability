@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1   # number of processor cores (i.e. tasks)
 #SBATCH --nodes=1   # number of nodes
 #SBATCH --mem-per-cpu=16384M  # memory per CPU core
-#SBATCH -J "Decon1"  # job name
+#SBATCH -J "decon3"  # job name
 
 # Compatibility variables for PBS. Delete if not needed.
 export PBS_NODEFILE=`/fslapps/fslutils/generate_pbs_nodefile`
@@ -27,11 +27,9 @@ HOME_DIR=/fslhome/ben88/compute/Reading/Compute_data
 	subj_DIR=${HOME_DIR}/SubjData/${1}
 	TEMPLATE=${HOME_DIR}/templates/
 	TIMING=${HOME_DIR}/TimingFiles/predictability
-        TIMING_POS=$TIMING/pos/${1}.txt
-        TIMING_LSA=$TIMING/lsa/${1}.txt
-        TIMING_ORTHO=$TIMING/ortho/${1}.txt
-        TIMING_FREQ=$TIMING/frequency/${1}.txt
-        TIMING_LENG=$TIMING/length/${1}.txt
+        TIMING_ORTHO=$TIMING/ortho_noDM/${1}.txt
+        TIMING_POS=$TIMING/pos_noDM/${1}.txt
+        TIMING_LSA=$TIMING/lsa_noDM/${1}.txt
 LOG=/fslhome/ben88/logfiles
 
 ##########
@@ -45,12 +43,12 @@ LOG=/fslhome/ben88/logfiles
 cd $subj_DIR
 cd afni_data
 
-if [ ! -d predictability1 ]
+if [ ! -d predictability3 ]
     then
-        mkdir predictability1
+        mkdir predictability3
 fi
 
-cd predictability1
+cd predictability3
 
 #####################
 #REGRESSION ANALYSIS#

@@ -4,7 +4,7 @@
 #SBATCH --ntasks=1   # number of processor cores (i.e. tasks)
 #SBATCH --nodes=1   # number of nodes
 #SBATCH --mem-per-cpu=16384M  # memory per CPU core
-#SBATCH -J "ANTS"  # job name
+#SBATCH -J "ANTS3"  # job name
 
 # Compatibility variables for PBS. Delete if not needed.
 export PBS_NODEFILE=`/fslapps/fslutils/generate_pbs_nodefile`
@@ -66,9 +66,9 @@ fi
 #modeltemplate.nii.gz & ANTifyFunctional in the main study directory
 #Also assumes that ANTs is installed on your system.
 
-cd $subj_DIR/afni_data/predictability/predictability1
+cd $subj_DIR/afni_data/predictability3/
 
-${antifyFunk} $subj_DIR/afni_data/struct_rotated ${TEMPLATE} $subj_DIR/afni_data/predictability1/predictability_deconv_blur5+orig
+${antifyFunk} $subj_DIR/afni_data/struct_rotated ${TEMPLATE} $subj_DIR/afni_data/predictability3/predictability_deconv_blur5+orig
 
 
 #cd back to the main study directory
