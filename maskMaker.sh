@@ -6,13 +6,13 @@
 
 #environmental variables
 START=$(pwd)    #starting directory
-PROJECT=/Users/ben88/Documents/Research/fMRI_data/Reading   #home directory
+PROJECT=~/compute/Reading   #home directory
 SUBJ_DIR=$PROJECT/Compute_data/SubjData                     #directory with individual subject data
 GROUP_DIR=$PROJECT/results/Group_Analysis2/predictability3  #directory with group results
 GROUP_FILE=$GROUP_DIR/pred_lsa+tlrc.HEAD                    #group results file
 WORK_DIR=$GROUP_DIR                                         #working directory or where you want your output files to be created.
 TABLE=$WORK_DIR/roiTable                                    #output table
-MASTER=$GROUP_DIR/cthulhu_mni+tlrc                          #anatomical template must manually update this below
+MASTER=$GROUP_DIR/pred_lsa+tlrc                		    #this should be the template aligned group results file to ensure the sphere file has the same dimensions
 RADIUS=7.5
 
 #set working directory
