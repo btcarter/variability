@@ -20,35 +20,35 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 ###############
 
 
-AFNI_BIN=/fslhome/ben88/abin
-HOME_DIR=/fslhome/ben88/compute/Reading/Compute_data
-	SCRIPT_DIR=${HOME_DIR}/Scripts
-		antifyFunk=$SCRIPT_DIR/ANTifyFunctional
-	subj_DIR=${HOME_DIR}/SubjData/${1}
-	TEMPLATE=${HOME_DIR}/templates/
-	TIMING=${HOME_DIR}/TimingFiles/predictability
-        TIMING_ORTHO=$TIMING/ortho_noDM/${1}.txt
-        TIMING_POS=$TIMING/pos_noDM/${1}.txt
-        TIMING_LSA=$TIMING/lsa_noDM/${1}.txt
-LOG=/fslhome/ben88/logfiles
+AFNI_BIN=/fslhome/ben88/abin #where to find the afni scripts
+HOME_DIR=/fslhome/ben88/compute/Reading #study directory
+SCRIPT_DIR=${HOME_DIR}/scripts/variability #where your scripts are
+antifyFunk=$SCRIPT_DIR/ANTifyFunctional #where Brock's antify script lives
+subj_DIR=${HOME_DIR}/Compute_data/SubjData/${1} #where the individual subject's data are found
+TEMPLATE=~/templates/Cthulhu #where your anatomical template is found
+TIMING=${HOME_DIR}/TimingFiles/variability #directory for HDF of timing files
+FIXATION=$TIMING/fixationCross.txt #where fixation cross files are for the subject
+READING=$TIMING/readingBlock.txt #where reading block files are for the subject
+LOG=/fslhome/ben88/logfiles #where to write output and error logs for this subject
+PREFIX=variability #the prefix your are using for this analysis
 
 ##########
 #COMMANDS#
 ##########
 
-#  Created by Benjamin Carter on 03/20/2017.
+#  Created by Benjamin Carter on 11/27/2018.
 #  This script performs Ordinary Least Square Regression of subject data using 3dDeconvolve from the AFNI software package.
 
 
 cd $subj_DIR
 cd afni_data
 
-if [ ! -d predictability3 ]
+if [ ! -d $PREFIX ]
     then
-        mkdir predictability3
+        mkdir $PREFIX
 fi
 
-cd predictability3
+cd $PREFIX
 
 #####################
 #REGRESSION ANALYSIS#
@@ -56,34 +56,34 @@ cd predictability3
 
 
 
-if [ -f $TIMING_POS ] && [ ! -f predictability_deconv+orig.BRIK ]
+if [ -f $FIXATION ] && [ ! -f $PREFIX+orig.BRIK ]
     then
         #3dDeconvolve
         ${AFNI_BIN}/3dDeconvolve \
             -input $subj_DIR/afni_data/epi1_volreg+orig $subj_DIR/afni_data/epi2_volreg+orig $subj_DIR/afni_data/epi3_volreg+orig \
             -mask $subj_DIR/afni_data/struct_mask+orig \
             -polort A \
-            -num_stimts 9 \
+            -num_stimts 8 \
             -stim_file 1 "$subj_DIR/motion/motion.txt[0]" -stim_label 1 "Roll"  -stim_base   1 \
             -stim_file 2 "$subj_DIR/motion/motion.txt[1]" -stim_label 2 "Pitch" -stim_base   2 \
             -stim_file 3 "$subj_DIR/motion/motion.txt[2]" -stim_label 3 "Yaw"   -stim_base   3 \
             -stim_file 4 "$subj_DIR/motion/motion.txt[3]" -stim_label 4 "dS"    -stim_base   4 \
             -stim_file 5 "$subj_DIR/motion/motion.txt[4]" -stim_label 5 "dL"    -stim_base   5 \
             -stim_file 6 "$subj_DIR/motion/motion.txt[5]" -stim_label 6 "dP"    -stim_base   6 \
-            -stim_times_AM2 7 ${TIMING_POS} 'dmBLOCK' -stim_label 7 "POS" \
-            -stim_times_AM2 8 ${TIMING_LSA} 'dmBLOCK' -stim_label 8 "LSA" \
-            -stim_times_AM2 9 ${TIMING_ORTHO} 'dmBLOCK' -stim_label 9 "ORTHO" \
+            -stim_times 7 ${FIXATION} 'BLOCK(6,1)' -stim_label 7 "FIX" \
+            -stim_times 8 ${READING} 'BLOCK(12,1)' -stim_label 8 "READ" \
             -num_glt 3 \
-            -gltsym 'SYM: POS' \
-            -glt_label 1 POS \
-            -gltsym 'SYM: LSA' \
+            -gltsym 'SYM: FIX' \
+            -glt_label 1 FIX \
+            -gltsym 'SYM: READ' \
             -glt_label 2 LSA \
-            -gltsym 'SYM: ORTHO' \
-            -glt_label 3 ORTHO \
+            -gltsym 'SYM: READ-FIX' \
+            -glt_label 3 READ-FIX \
             -censor "$subj_DIR/motion/motion_censor_vector.txt[0]" \
-            -nocout -tout \
-            -bucket predictability_deconv \
-            -xjpeg predictability_design.jpg \
+            -nocout \
+            -tout \
+            -bucket $PREFIX_deconv \
+            -xjpeg $PREFIX_design.jpg \
             -jobs 2 \
             -GOFORIT 12
 fi
@@ -91,7 +91,7 @@ fi
 
 
 #blur the output of the regression analysis
-if [ -f predictability_deconv+orig.BRIK ] && [ ! -f predictability_deconv_blur5+orig.BRIK ]
+if [ -f $PREFIX_deconv+orig.BRIK ] && [ ! -f $PREFIX_deconv_blur5+orig.BRIK ]
     then
-        ${AFNI_BIN}/3dmerge -prefix predictability_deconv_blur5 -1blur_fwhm 5.0 -doall predictability_deconv+orig
+        ${AFNI_BIN}/3dmerge -prefix $PREFIX_deconv_blur5 -1blur_fwhm 5.0 -doall $PREFIX_deconv+orig
 fi
