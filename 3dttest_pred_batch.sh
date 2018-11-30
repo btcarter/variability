@@ -10,9 +10,9 @@
 #ENVIRONMENT#
 #############
 
-HOME_DIR=/fslhome/ben88/compute/Reading/Compute_data
-SCRIPT_DIR=${HOME_DIR}/Scripts
-SUBJ_DIR=${HOME_DIR}/SubjData
+HOME_DIR=/fslhome/ben88/compute/Reading
+SCRIPT_DIR=${HOME_DIR}/analyses/variability
+SUBJ_DIR=${HOME_DIR}/mriData
 
 ##########
 #COMMANDS#
@@ -26,6 +26,6 @@ mkdir -p ~/logfiles/$var
 sbatch \
     -o ~/logfiles/${var}/output_group_fixDur.txt \
     -e ~/logfiles/${var}/error_group_fixDur.txt \
-    ${SCRIPT_DIR}/predictability/predictability3/3dttest_pred_job.sh \
+    ${SCRIPT_DIR}/3dttest_pred_job.sh \
     sleep 1
 

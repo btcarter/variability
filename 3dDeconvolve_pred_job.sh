@@ -22,11 +22,11 @@ export OMP_NUM_THREADS=$SLURM_CPUS_ON_NODE
 
 AFNI_BIN=/fslhome/ben88/abin #where to find the afni scripts
 HOME_DIR=/fslhome/ben88/compute/Reading #study directory
-SCRIPT_DIR=${HOME_DIR}/scripts/variability #where your scripts are
+SCRIPT_DIR=${HOME_DIR}/analyses/variability #where your scripts are
 antifyFunk=$SCRIPT_DIR/ANTifyFunctional #where Brock's antify script lives
-subj_DIR=${HOME_DIR}/Compute_data/SubjData/${1} #where the individual subject's data are found
+subj_DIR=${HOME_DIR}/mriData/${1} #where the individual subject's data are found
 TEMPLATE=~/templates/Cthulhu #where your anatomical template is found
-TIMING=${HOME_DIR}/TimingFiles/variability #directory for HDF of timing files
+TIMING=${HOME_DIR}/timingFiles/variability #directory for HDF of timing files
 FIXATION=$TIMING/fixationCross.txt #where fixation cross files are for the subject
 READING=$TIMING/readingBlock.txt #where reading block files are for the subject
 LOG=/fslhome/ben88/logfiles #where to write output and error logs for this subject
