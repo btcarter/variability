@@ -69,8 +69,7 @@ fi
 
 cd $subj_DIR/afni_data/${PREFIX}3/
 
-${antifyFunk} $subj_DIR/afni_data/struct_rotated ${TEMPLATE} $subj_DIR/afni_data/${PREFIX}3/${PREFIX}_deconv_blur5+orig
-
+${antifyFunk} $subj_DIR/afni_data/struct_rotated ${TEMPLATE} $subj_DIR/afni_data/${PREFIX}/${PREFIX}_deconv_blur5+orig
 
 #cd back to the main study directory
 cd ${HOME_DIR}

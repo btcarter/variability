@@ -10,9 +10,10 @@
 #ENVIRONMENT#
 #############
 
-HOME_DIR=/fslhome/ben88/compute/Reading
-SCRIPT_DIR=${HOME_DIR}/analyses/variability
-SUBJ_DIR=${HOME_DIR}/mriData
+PREFIX=variability #the prefix your are using for this analysis
+HOME_DIR=/fslhome/ben88/compute/Reading #project directory
+SCRIPT_DIR=${HOME_DIR}/analyses/${PREFIX} #analysis script location
+SUBJ_DIR=${HOME_DIR}/mriData #subject data location
 
 ##########
 #COMMANDS#
