@@ -76,7 +76,7 @@ if [ -f $FIXATION ] && [ ! -f $PREFIX+orig.BRIK ]
             -gltsym 'SYM: FIX' \
             -glt_label 1 FIX \
             -gltsym 'SYM: READ' \
-            -glt_label 2 LSA \
+            -glt_label 2 READ \
             -gltsym 'SYM: READ-FIX' \
             -glt_label 3 READ-FIX \
             -censor "$subj_DIR/motion/motion_censor_vector.txt[0]" \
