@@ -70,15 +70,11 @@ if [ -f $FIXATION ] && [ ! -f $PREFIX+orig.BRIK ]
             -stim_file 4 "$subj_DIR/motion/motion.txt[3]" -stim_label 4 "dS"    -stim_base   4 \
             -stim_file 5 "$subj_DIR/motion/motion.txt[4]" -stim_label 5 "dL"    -stim_base   5 \
             -stim_file 6 "$subj_DIR/motion/motion.txt[5]" -stim_label 6 "dP"    -stim_base   6 \
-            -stim_times 7 ${FIXATION} 'BLOCK(6,1)' -stim_label 7 "FIX" \
-            -stim_times 8 ${READING} 'BLOCK(12,1)' -stim_label 8 "READ" \
-            -num_glt 3 \
-            -gltsym 'SYM: FIX' \
-            -glt_label 1 FIX \
-            -gltsym 'SYM: READ' \
-            -glt_label 2 READ \
+            -stim_times 7 ${FIXATION} 'BLOCK(6,1)' -stim_label 7 FIX \
+            -stim_times 8 ${READING} 'BLOCK(12,1)' -stim_label 8 READ \
+            -num_glt 1 \
             -gltsym 'SYM: READ-FIX' \
-            -glt_label 3 READ-FIX \
+            -glt_label 1 READ-FIX \
             -censor "$subj_DIR/motion/motion_censor_vector.txt[0]" \
             -nocout \
             -tout \
