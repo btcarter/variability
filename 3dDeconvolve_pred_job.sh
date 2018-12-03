@@ -82,8 +82,8 @@ if [ -f $FIXATION ] && [ ! -f $PREFIX+orig.BRIK ]
             -censor "$subj_DIR/motion/motion_censor_vector.txt[0]" \
             -nocout \
             -tout \
-            -bucket $PREFIX_deconv \
-            -xjpeg $PREFIX_design.jpeg \
+            -bucket ${PREFIX}_deconv \
+            -xjpeg ${PREFIX}_design.jpg \
             -jobs 2 \
             -GOFORIT 12
 fi
