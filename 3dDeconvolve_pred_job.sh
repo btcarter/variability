@@ -83,7 +83,7 @@ if [ -f $FIXATION ] && [ ! -f $PREFIX+orig.BRIK ]
             -nocout \
             -tout \
             -bucket $PREFIX_deconv \
-            -xjpeg $PREFIX_design.jpg \
+            -xjpeg $PREFIX_design.jpeg \
             -jobs 2 \
             -GOFORIT 12
 fi
